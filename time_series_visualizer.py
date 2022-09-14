@@ -7,7 +7,7 @@ from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
 
 # Import data
-df = pd.read_csv("fcc-forum-pageviews.csv", parse_dates=['date'], index_col="date")
+df = pd.read_csv("fcc-forum-pageviews.csv", parse_dates = ['date'], index_col = "date")
 
 # Clean the data by filtering out days when the page views were in the top 2.5% of the dataset or bottom 2.5% of the dataset.
 low, high = df["value"].quantile([0.025, 0.975])
@@ -17,8 +17,8 @@ df = df[mask_pcount]
 # Draw line plot
 def draw_line_plot():
 
-    fig, ax = plt.subplots(figsize=(20, 10))
-    plt.plot(df, label='lineplots', color='r', linewidth=1.0)
+    fig, ax = plt.subplots(figsize = (20, 10))
+    plt.plot(df, label = 'lineplots', color = 'r', linewidth = 1.0)
     plt.xlabel('Date')
     plt.ylabel('Page Views')
     plt.title('Daily freeCodeCamp Forum Page Views 5/2016-12/2019')
@@ -61,13 +61,13 @@ def draw_box_plot():
 
     # Draw box plots using Seaborn    
     fig, axes = plt.subplots(1, 2, figsize=(20, 10))
-    sns.boxplot(x=df_box['Year'], y=df_box['value'].rename('Page Views'),
-                ax=axes[0]).set(title='Year-wise Box Plot (Trend)')
+    sns.boxplot(x = df_box['Year'], y = df_box['value'].rename('Page Views'),
+                ax = axes[0]).set(title = 'Year-wise Box Plot (Trend)')
 
-    sns.boxplot(x=df_box['Month'], y=df_box['value'].rename('Page Views'),
-                order=months,
-                ax=axes[1]).set(title='Month-wise Box Plot (Seasonality)')
+    sns.boxplot(x = df_box['Month'], y = df_box['value'].rename('Page Views'),
+                order = months,
+                ax = axes[1]).set(title = 'Month-wise Box Plot (Seasonality)')
 
-    # Save image and return fig (don't change this part)
+    # Save image and return fig
     fig.savefig('box_plot.png')
     return fig
